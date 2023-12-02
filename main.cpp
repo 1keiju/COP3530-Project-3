@@ -182,6 +182,13 @@ int main() {
         bool button3Pressed = false;
         bool button4Pressed = false;
 
+        // initialize variables used to determine what filter is selected
+        bool filter1Pressed = true;
+        bool filter2Pressed = false;
+        bool filter3Pressed = false;
+        bool filter4Pressed = false;
+        bool filter5Pressed = false;
+
         // while menu screen is open
         while(menuScreen.isOpen()) {
 
@@ -204,7 +211,7 @@ int main() {
             sf::RectangleShape button2(sf::Vector2f(180, 100));
             button2.setPosition(210, 0);
             button2.setOutlineThickness(10);
-            button2.setOutlineColor(sf::Color::Cyan);
+            button2.setOutlineColor(sf::Color::Blue);
             button2.setFillColor(sf::Color::White);
             sf::Text button2Text;
             button2Text.setFont(font);
@@ -220,7 +227,7 @@ int main() {
             sf::RectangleShape button3(sf::Vector2f(180, 100));
             button3.setPosition(410, 0);
             button3.setOutlineThickness(10);
-            button3.setOutlineColor(sf::Color::Green);
+            button3.setOutlineColor(sf::Color::Blue);
             button3.setFillColor(sf::Color::White);
             sf::Text button3Text;
             button3Text.setFont(font);
@@ -236,7 +243,7 @@ int main() {
             sf::RectangleShape button4(sf::Vector2f(190, 100));
             button4.setPosition(610, 0);
             button4.setOutlineThickness(10);
-            button4.setOutlineColor(sf::Color::Red);
+            button4.setOutlineColor(sf::Color::Blue);
             button4.setFillColor(sf::Color::White);
             sf::Text button4Text;
             button4Text.setFont(font);
@@ -312,6 +319,68 @@ int main() {
 
                         }
                     }
+
+                    // if on sort menu, check if a filter is clicked on
+                    if(button3Pressed) {
+
+                        if(20 < position.x && position.x < 270) {
+
+                            // check if mouse is in filter 1
+                            if(200 < position.y  && position.y < 275) {
+
+                                filter1Pressed = true;
+                                filter2Pressed = false;
+                                filter3Pressed = false;
+                                filter4Pressed = false;
+                                filter5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 2
+                            if(300 < position.y && position.y < 375) {
+
+                                filter1Pressed = false;
+                                filter2Pressed = true;
+                                filter3Pressed = false;
+                                filter4Pressed = false;
+                                filter5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 3
+                            if(400 < position.y && position.y < 475) {
+
+                                filter1Pressed = false;
+                                filter2Pressed = false;
+                                filter3Pressed = true;
+                                filter4Pressed = false;
+                                filter5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 4
+                            if(500 < position.y && position.y < 575) {
+
+                                filter1Pressed = false;
+                                filter2Pressed = false;
+                                filter3Pressed = false;
+                                filter4Pressed = true;
+                                filter5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 5
+                            if(600 < position.y && position.y < 675) {
+
+                                filter1Pressed = false;
+                                filter2Pressed = false;
+                                filter3Pressed = false;
+                                filter4Pressed = false;
+                                filter5Pressed = true;
+
+                            }
+                        }
+                    }
                 }
             }
 
@@ -333,6 +402,14 @@ int main() {
             selectedText.setCharacterSize(12);
             selectedText.setStyle(sf::Text::Bold);
             selectedText.setFillColor(sf::Color::Green);
+
+            // shows user which filter is selected in the sort menu
+            sf::Text selectedFilterText;
+            selectedFilterText.setFont(font);
+            selectedFilterText.setString("(Selected)");
+            selectedFilterText.setCharacterSize(12);
+            selectedFilterText.setStyle(sf::Text::Bold);
+            selectedFilterText.setFillColor(sf::Color::Green);
 
             // check conditions of which button was last pressed
             // if button 1, display home screen
@@ -388,7 +465,7 @@ int main() {
                 sf::RectangleShape filter1(sf::Vector2f(250, 75));
                 filter1.setPosition(20, 200);
                 filter1.setOutlineThickness(10);
-                filter1.setOutlineColor(sf::Color::Magenta);
+                filter1.setOutlineColor(sf::Color(255, 127, 0));
                 filter1.setFillColor(sf::Color::White);
                 sf::Text filter1Text;
                 filter1Text.setFont(font);
@@ -406,7 +483,7 @@ int main() {
                 sf::RectangleShape filter2(sf::Vector2f(250, 75));
                 filter2.setPosition(20, 300);
                 filter2.setOutlineThickness(10);
-                filter2.setOutlineColor(sf::Color::Magenta);
+                filter2.setOutlineColor(sf::Color(255, 127, 0));
                 filter2.setFillColor(sf::Color::White);
                 sf::Text filter2Text;
                 filter2Text.setFont(font);
@@ -424,7 +501,7 @@ int main() {
                 sf::RectangleShape filter3(sf::Vector2f(250, 75));
                 filter3.setPosition(20, 400);
                 filter3.setOutlineThickness(10);
-                filter3.setOutlineColor(sf::Color::Magenta);
+                filter3.setOutlineColor(sf::Color(255, 127, 0));
                 filter3.setFillColor(sf::Color::White);
                 sf::Text filter3Text;
                 filter3Text.setFont(font);
@@ -442,7 +519,7 @@ int main() {
                 sf::RectangleShape filter4(sf::Vector2f(250, 75));
                 filter4.setPosition(20, 500);
                 filter4.setOutlineThickness(10);
-                filter4.setOutlineColor(sf::Color::Magenta);
+                filter4.setOutlineColor(sf::Color(255, 127, 0));
                 filter4.setFillColor(sf::Color::White);
                 sf::Text filter4Text;
                 filter4Text.setFont(font);
@@ -460,11 +537,11 @@ int main() {
                 sf::RectangleShape filter5(sf::Vector2f(250, 75));
                 filter5.setPosition(20, 600);
                 filter5.setOutlineThickness(10);
-                filter5.setOutlineColor(sf::Color::Magenta);
+                filter5.setOutlineColor(sf::Color(255, 127, 0));
                 filter5.setFillColor(sf::Color::White);
                 sf::Text filter5Text;
                 filter5Text.setFont(font);
-                filter5Text.setString("ID Number");
+                filter5Text.setString("Voter Average");
                 filter5Text.setCharacterSize(20);
                 filter5Text.setStyle(sf::Text::Bold);
                 filter5Text.setFillColor(sf::Color::Black);
@@ -475,8 +552,45 @@ int main() {
                 menuScreen.draw(filter5Text);
 
                 // check conditions for which filter is selected, then display the appropriate data
-                // !! THIS STILL NEEDS TO BE IMPLEMENTED !!
+                if(filter1Pressed) {
 
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 262.5);
+                    menuScreen.draw(selectedFilterText);
+
+                }
+
+                if(filter2Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 362.5);
+                    menuScreen.draw(selectedFilterText);
+
+                }
+
+                if(filter3Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 462.5);
+                    menuScreen.draw(selectedFilterText);
+
+                }
+
+                if(filter4Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 562.5);
+                    menuScreen.draw(selectedFilterText);
+
+                }
+
+                if(filter5Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 662.5);
+                    menuScreen.draw(selectedFilterText);
+
+                }
             }
 
             // if button 4, display help screen
