@@ -384,6 +384,99 @@ int main() {
                 setText(selectedText, 500, 75);
                 menuScreen.draw(selectedText);
 
+                // button for popularity filter
+                sf::RectangleShape filter1(sf::Vector2f(250, 75));
+                filter1.setPosition(20, 200);
+                filter1.setOutlineThickness(10);
+                filter1.setOutlineColor(sf::Color::Magenta);
+                filter1.setFillColor(sf::Color::White);
+                sf::Text filter1Text;
+                filter1Text.setFont(font);
+                filter1Text.setString("Popularity");
+                filter1Text.setCharacterSize(20);
+                filter1Text.setStyle(sf::Text::Bold);
+                filter1Text.setFillColor(sf::Color::Black);
+                float filter1TextX = ((float) 135);
+                float filter1TextY = ((float) 237.5);
+                setText(filter1Text, filter1TextX, filter1TextY);
+                menuScreen.draw(filter1);
+                menuScreen.draw(filter1Text);
+
+                // button for revenue filter
+                sf::RectangleShape filter2(sf::Vector2f(250, 75));
+                filter2.setPosition(20, 300);
+                filter2.setOutlineThickness(10);
+                filter2.setOutlineColor(sf::Color::Magenta);
+                filter2.setFillColor(sf::Color::White);
+                sf::Text filter2Text;
+                filter2Text.setFont(font);
+                filter2Text.setString("Revenue");
+                filter2Text.setCharacterSize(20);
+                filter2Text.setStyle(sf::Text::Bold);
+                filter2Text.setFillColor(sf::Color::Black);
+                float filter2TextX = ((float) 135);
+                float filter2TextY = ((float) 337.5);
+                setText(filter2Text, filter2TextX, filter2TextY);
+                menuScreen.draw(filter2);
+                menuScreen.draw(filter2Text);
+
+                // button for budget filter
+                sf::RectangleShape filter3(sf::Vector2f(250, 75));
+                filter3.setPosition(20, 400);
+                filter3.setOutlineThickness(10);
+                filter3.setOutlineColor(sf::Color::Magenta);
+                filter3.setFillColor(sf::Color::White);
+                sf::Text filter3Text;
+                filter3Text.setFont(font);
+                filter3Text.setString("Budget");
+                filter3Text.setCharacterSize(20);
+                filter3Text.setStyle(sf::Text::Bold);
+                filter3Text.setFillColor(sf::Color::Black);
+                float filter3TextX = ((float) 135);
+                float filter3TextY = ((float) 437.5);
+                setText(filter3Text, filter3TextX, filter3TextY);
+                menuScreen.draw(filter3);
+                menuScreen.draw(filter3Text);
+
+                // button for runtime filter
+                sf::RectangleShape filter4(sf::Vector2f(250, 75));
+                filter4.setPosition(20, 500);
+                filter4.setOutlineThickness(10);
+                filter4.setOutlineColor(sf::Color::Magenta);
+                filter4.setFillColor(sf::Color::White);
+                sf::Text filter4Text;
+                filter4Text.setFont(font);
+                filter4Text.setString("Runtime");
+                filter4Text.setCharacterSize(20);
+                filter4Text.setStyle(sf::Text::Bold);
+                filter4Text.setFillColor(sf::Color::Black);
+                float filter4TextX = ((float) 135);
+                float filter4TextY = ((float) 537.5);
+                setText(filter4Text, filter4TextX, filter4TextY);
+                menuScreen.draw(filter4);
+                menuScreen.draw(filter4Text);
+
+                // button for id filter
+                sf::RectangleShape filter5(sf::Vector2f(250, 75));
+                filter5.setPosition(20, 600);
+                filter5.setOutlineThickness(10);
+                filter5.setOutlineColor(sf::Color::Magenta);
+                filter5.setFillColor(sf::Color::White);
+                sf::Text filter5Text;
+                filter5Text.setFont(font);
+                filter5Text.setString("ID Number");
+                filter5Text.setCharacterSize(20);
+                filter5Text.setStyle(sf::Text::Bold);
+                filter5Text.setFillColor(sf::Color::Black);
+                float filter5TextX = ((float) 135);
+                float filter5TextY = ((float) 637.5);
+                setText(filter5Text, filter5TextX, filter5TextY);
+                menuScreen.draw(filter5);
+                menuScreen.draw(filter5Text);
+
+                // check conditions for which filter is selected, then display the appropriate data
+                // !! THIS STILL NEEDS TO BE IMPLEMENTED !!
+
             }
 
             // if button 4, display help screen
