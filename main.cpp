@@ -150,7 +150,7 @@ int main() {
 
         }
 
-            // else display the press enter key text
+        // else display the press enter key text
         else {
 
             sf::Text errorText;
@@ -224,7 +224,7 @@ int main() {
             button3.setFillColor(sf::Color::White);
             sf::Text button3Text;
             button3Text.setFont(font);
-            button3Text.setString("Search");
+            button3Text.setString("Sort");
             button3Text.setCharacterSize(25);
             button3Text.setStyle(sf::Text::Bold);
             button3Text.setFillColor(sf::Color::Black);
@@ -326,37 +326,72 @@ int main() {
             menuScreen.draw(button4);
             menuScreen.draw(button4Text);
 
+            // shows user which button is selected text
+            sf::Text selectedText;
+            selectedText.setFont(font);
+            selectedText.setString("(Selected)");
+            selectedText.setCharacterSize(12);
+            selectedText.setStyle(sf::Text::Bold);
+            selectedText.setFillColor(sf::Color::Green);
+
             // check conditions of which button was last pressed
             // if button 1, display home screen
             if(button1Pressed) {
 
-                // just a test
-                sf::Text testText;
-                testText.setFont(font);
-                testText.setString("TESTING");
-                testText.setCharacterSize(25);
-                testText.setStyle(sf::Text::Bold);
-                testText.setFillColor(sf::Color::Green);
-                float testTextX = ((float) 400);
-                float testTextY = ((float) 325);
-                setText(testText, testTextX, testTextY);
-                menuScreen.draw(testText);
+                // show button is selected
+                setText(selectedText, 100, 75);
+                menuScreen.draw(selectedText);
+
+                // hello name text
+                sf::Text helloText;
+                helloText.setFont(font);
+                helloText.setString("Hello, " + name + "!");
+                helloText.setCharacterSize(50);
+                helloText.setStyle(sf::Text::Bold);
+                helloText.setFillColor(sf::Color::White);
+                float helloTextX = ((float) 400);
+                float helloTextY = ((float) 325);
+                setText(helloText, helloTextX, helloTextY);
+                menuScreen.draw(helloText);
+
+                // home screen text
+                sf::Text homeText;
+                homeText.setFont(font);
+                homeText.setString("Use the buttons at the top of the screen to navigate!");
+                homeText.setCharacterSize(17);
+                homeText.setStyle(sf::Text::Bold);
+                homeText.setFillColor(sf::Color::White);
+                float homeTextX = ((float) 400);
+                float homeTextY = ((float) 375);
+                setText(homeText, homeTextX, homeTextY);
+                menuScreen.draw(homeText);
 
             }
 
             // if button 2, display top movies screen
             if(button2Pressed) {
 
+                // show button is selected
+                setText(selectedText, 300, 75);
+                menuScreen.draw(selectedText);
+
             }
 
             // if button 3, display search screen
             if(button3Pressed) {
 
+                // show button is selected
+                setText(selectedText, 500, 75);
+                menuScreen.draw(selectedText);
 
             }
 
             // if button 4, display help screen
             if(button4Pressed) {
+
+                // show button is selected
+                setText(selectedText, 700, 75);
+                menuScreen.draw(selectedText);
 
             }
 
