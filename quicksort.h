@@ -8,12 +8,8 @@ void quickSort(std::vector<Movie> &movie_list, int low, int high, std::string fi
 
 int partition(std::vector<Movie> &movie_list, int low, int high, std::string filter, bool descending) {
 	double pivot;
-	//setting pivot point, can sort by id, popularity, budget, revenue, runtime, vote average, or vote count
-	if (filter == "id" || filter == "ID" || filter == "Id") {
-		pivot = movie_list[low].movieID;
-	}
-
-	else if (filter == "budget" || filter == "Budget") {
+	//setting pivot point, can sort by budget, revenue, runtime, vote average, or popularity 
+	if (filter == "budget" || filter == "Budget") {
 		pivot = movie_list[low].movieBudget;
 	}
 
@@ -28,11 +24,6 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 	else if (filter == "vote average" || filter == "Vote Average" || filter == "Vote average") {
 		pivot = movie_list[low].voteAverage;
 	}
-
-	else if (filter == "vote count" || filter == "Vote Count" || filter == "Vote count") {
-		pivot = movie_list[low].voteCount;
-	}
-
 	//popularity as default
 	else {
 		pivot = movie_list[low].popularityScore;
@@ -45,15 +36,9 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 	while (up < down) {
 		//increment until up greater than pivot
 		for (int i = up; i < high; i++) {
-			//for each search filter: id, popularity, budget, revenue, runtime, vote average, and vote count
-			if (filter == "id" || filter == "ID" || filter == "Id") {
-				//sort by descending order or ascending order, respectively
-				if ((descending && movie_list[up].movieID < pivot) || (!descending && movie_list[up].movieID > pivot)) {
-					break;
-				}
-			}
-
-			else if (filter == "budget" || filter == "Budget") {
+			//for each search filter: budget, revenue, runtime, vote average, and popularity
+			if (filter == "budget" || filter == "Budget") {
+				//sort by descending order or ascending order
 				if ((descending && movie_list[up].movieBudget < pivot) || (!descending && movie_list[up].movieBudget > pivot)) {
 					break;
 				}
@@ -77,12 +62,6 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 				}
 			}
 
-			else if (filter == "vote count" || filter == "Vote Count" || filter == "Vote count") {
-				if ((descending && movie_list[up].voteCount < pivot) || (!descending && movie_list[up].voteCount > pivot)) {
-					break;
-				}
-			}
-
 			else {
 				if ((descending && movie_list[up].popularityScore < pivot) || (!descending && movie_list[up].popularityScore > pivot)) {
 					break;
@@ -94,13 +73,7 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 
 		//decrement until down less than pivot
 		for (int i = high; i > low; i--) {
-			if (filter == "id" || filter == "ID" || filter == "Id") {
-				if ((descending && movie_list[down].movieID > pivot) || (!descending && movie_list[down].movieID < pivot)) {
-					break;
-				}
-			}
-
-			else if (filter == "budget" || filter == "Budget") {
+			if (filter == "budget" || filter == "Budget") {
 				if ((descending && movie_list[down].movieBudget > pivot) || (!descending && movie_list[down].movieBudget < pivot)) {
 					break;
 				}
@@ -120,12 +93,6 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 
 			else if (filter == "vote average" || filter == "Vote Average" || filter == "Vote average") {
 				if ((descending && movie_list[down].voteAverage > pivot) || (!descending && movie_list[down].voteAverage < pivot)) {
-					break;
-				}
-			}
-
-			else if (filter == "vote count" || filter == "Vote Count" || filter == "Vote count") {
-				if ((descending && movie_list[down].voteCount > pivot) || (!descending && movie_list[down].voteCount < pivot)) {
 					break;
 				}
 			}
