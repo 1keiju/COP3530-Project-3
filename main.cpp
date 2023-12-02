@@ -91,7 +91,7 @@ int main() {
 
                             }
 
-                            // make all other letters lower case
+                                // make all other letters lower case
                             else {
 
                                 int lower = std::tolower(inputString);
@@ -150,7 +150,7 @@ int main() {
 
         }
 
-        // else display the press enter key text
+            // else display the press enter key text
         else {
 
             sf::Text errorText;
@@ -176,27 +176,190 @@ int main() {
         // set the menu screen as 800x800
         sf::RenderWindow menuScreen(sf::VideoMode(800, 800), "Movie Recommender");
 
+        // initialize variables used to determine what screen is open
+        bool button1Pressed = true;
+        bool button2Pressed = false;
+        bool button3Pressed = false;
+        bool button4Pressed = false;
+
         // while menu screen is open
         while(menuScreen.isOpen()) {
 
-            // the four buttons on top of the screen
+            // first button - Home Page
+            sf::RectangleShape button1(sf::Vector2f(190, 100));
+            button1.setOutlineThickness(10);
+            button1.setOutlineColor(sf::Color::Blue);
+            button1.setFillColor(sf::Color::White);
+            sf::Text button1Text;
+            button1Text.setFont(font);
+            button1Text.setString("Home");
+            button1Text.setCharacterSize(25);
+            button1Text.setStyle(sf::Text::Bold);
+            button1Text.setFillColor(sf::Color::Black);
+            float button1TextX = ((float) 100);
+            float button1TextY = ((float) 50);
+            setText(button1Text, button1TextX, button1TextY);
 
+            // second button - Top Movies Page
+            sf::RectangleShape button2(sf::Vector2f(180, 100));
+            button2.setPosition(210, 0);
+            button2.setOutlineThickness(10);
+            button2.setOutlineColor(sf::Color::Cyan);
+            button2.setFillColor(sf::Color::White);
+            sf::Text button2Text;
+            button2Text.setFont(font);
+            button2Text.setString("Top Movies");
+            button2Text.setCharacterSize(25);
+            button2Text.setStyle(sf::Text::Bold);
+            button2Text.setFillColor(sf::Color::Black);
+            float button2TextX = ((float) 300);
+            float button2TextY = ((float) 50);
+            setText(button2Text, button2TextX, button2TextY);
 
+            // third button - Search Page
+            sf::RectangleShape button3(sf::Vector2f(180, 100));
+            button3.setPosition(410, 0);
+            button3.setOutlineThickness(10);
+            button3.setOutlineColor(sf::Color::Green);
+            button3.setFillColor(sf::Color::White);
+            sf::Text button3Text;
+            button3Text.setFont(font);
+            button3Text.setString("Search");
+            button3Text.setCharacterSize(25);
+            button3Text.setStyle(sf::Text::Bold);
+            button3Text.setFillColor(sf::Color::Black);
+            float button3TextX = ((float) 500);
+            float button3TextY = ((float) 50);
+            setText(button3Text, button3TextX, button3TextY);
+
+            // fourth button - Help Page
+            sf::RectangleShape button4(sf::Vector2f(190, 100));
+            button4.setPosition(610, 0);
+            button4.setOutlineThickness(10);
+            button4.setOutlineColor(sf::Color::Red);
+            button4.setFillColor(sf::Color::White);
+            sf::Text button4Text;
+            button4Text.setFont(font);
+            button4Text.setString("Help");
+            button4Text.setCharacterSize(25);
+            button4Text.setStyle(sf::Text::Bold);
+            button4Text.setFillColor(sf::Color::Black);
+            float button4TextX = ((float) 700);
+            float button4TextY = ((float) 50);
+            setText(button4Text, button4TextX, button4TextY);
 
             // check for events
             sf::Event event{};
-            while (welcomeScreen.pollEvent(event)) {
+            while (menuScreen.pollEvent(event)) {
 
                 // close screen if exit button pressed
                 if (event.type == sf::Event::Closed) {
 
-                    welcomeScreen.close();
+                    menuScreen.close();
 
+                }
+
+                // handle clicking the buttons
+                if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+                    sf::Vector2i position = sf::Mouse::getPosition(menuScreen);
+
+                    // check if mouse is in button 1
+                    if(position.x < 190 && position.y < 100) {
+
+                        button1Pressed = true;
+                        button2Pressed = false;
+                        button3Pressed = false;
+                        button4Pressed = false;
+
+                    }
+
+                    // check if mouse is in button 2
+                    if(210 < position.x && position.x < 390) {
+
+                        if(position.y < 100) {
+
+                            button1Pressed = false;
+                            button2Pressed = true;
+                            button3Pressed = false;
+                            button4Pressed = false;
+
+                        }
+                    }
+
+                    // check if mouse is in button 3
+                    if(410 < position.x && position.x < 590) {
+
+                        if(position.y < 100) {
+
+                            button1Pressed = false;
+                            button2Pressed = false;
+                            button3Pressed = true;
+                            button4Pressed = false;
+
+                        }
+                    }
+
+                    // check if mouse is in button 4
+                    if(610 < position.x && position.x < 800) {
+
+                        if(position.y < 100) {
+
+                            button1Pressed = false;
+                            button2Pressed = false;
+                            button3Pressed = false;
+                            button4Pressed = true;
+
+                        }
+                    }
                 }
             }
 
             // sets background color and draw text
             menuScreen.clear(sf::Color::Black);
+            menuScreen.draw(button1);
+            menuScreen.draw(button1Text);
+            menuScreen.draw(button2);
+            menuScreen.draw(button2Text);
+            menuScreen.draw(button3);
+            menuScreen.draw(button3Text);
+            menuScreen.draw(button4);
+            menuScreen.draw(button4Text);
+
+            // check conditions of which button was last pressed
+            // if button 1, display home screen
+            if(button1Pressed) {
+
+                // just a test
+                sf::Text testText;
+                testText.setFont(font);
+                testText.setString("TESTING");
+                testText.setCharacterSize(25);
+                testText.setStyle(sf::Text::Bold);
+                testText.setFillColor(sf::Color::Green);
+                float testTextX = ((float) 400);
+                float testTextY = ((float) 325);
+                setText(testText, testTextX, testTextY);
+                menuScreen.draw(testText);
+
+            }
+
+            // if button 2, display top movies screen
+            if(button2Pressed) {
+
+            }
+
+            // if button 3, display search screen
+            if(button3Pressed) {
+
+
+            }
+
+            // if button 4, display help screen
+            if(button4Pressed) {
+
+            }
+
             menuScreen.display();
 
         }
