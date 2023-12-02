@@ -39,74 +39,52 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 	while (up < down) {
 		//increment until up greater than pivot
 		for (int i = up; i < high; i++) {
-			//for each search filter: id, popularity, budget, revenue, runtime, vote average, or vote count
+			//for each search filter: id, popularity, budget, revenue, runtime, vote average, and vote count
 			if (filter == "id" || filter == "ID" || filter == "Id") {
-				//descending order
-				if (descending && movie_list[up].movieID < pivot) {
-					break;
-				}
-				//ascending order
-				else if (!descending && movie_list[up].movieID > pivot) {
+				//sort by descending order or ascending order
+				if ((descending && movie_list[up].movieID < pivot) || (!descending && movie_list[up].movieID > pivot)) {
 					break;
 				}
 				up++;
 			}
 
 			else if (filter == "budget" || filter == "Budget") {
-				if (descending && movie_list[up].movieBudget < pivot) {
-					break;
-				}
-				else if (!descending && movie_list[up].movieBudget > pivot) {
+				if ((descending && movie_list[up].movieBudget < pivot) || (!descending && movie_list[up].movieBudget > pivot)) {
 					break;
 				}
 				up++;
 			}
 
 			else if (filter == "revenue" || filter == "Revenue") {
-				if (descending && movie_list[up].movieRevenue < pivot) {
-					break;
-				}
-				else if (!descending && movie_list[up].movieRevenue > pivot) {
+				if ((descending && movie_list[up].movieRevenue < pivot) || (!descending && movie_list[up].movieRevenue > pivot)) {
 					break;
 				}
 				up++;
 			}
 
 			else if (filter == "runtime" || filter == "Runtime") {
-				if (descending && movie_list[up].movieRuntime < pivot) {
-					break;
-				}
-				else if (!descending && movie_list[up].movieRuntime > pivot) {
+				if ((descending && movie_list[up].movieRuntime < pivot) || (!descending && movie_list[up].movieRuntime > pivot)) {
 					break;
 				}
 				up++;
 			}
 
 			else if (filter == "vote average" || filter == "Vote Average" || filter == "Vote average") {
-				if (descending && movie_list[up].voteAverage < pivot) {
-					break;
-				}
-				else if (!descending && movie_list[up].voteAverage > pivot) {
+				if ((descending && movie_list[up].voteAverage < pivot) || (!descending && movie_list[up].voteAverage > pivot)) {
 					break;
 				}
 				up++;
 			}
 
 			else if (filter == "vote count" || filter == "Vote Count" || filter == "Vote count") {
-				if (descending && movie_list[up].voteCount < pivot) {
-					break;
-				}
-				else if (!descending && movie_list[up].voteCount > pivot) {
+				if ((descending && movie_list[up].voteCount < pivot) || (!descending && movie_list[up].voteCount > pivot)) {
 					break;
 				}
 				up++;
 			}
 
 			else {
-				if (descending && movie_list[up].popularityScore < pivot) {
-					break;
-				}
-				else if (!descending && movie_list[up].popularityScore > pivot) {
+				if ((descending && movie_list[up].popularityScore < pivot) || (!descending && movie_list[up].popularityScore > pivot)) {
 					break;
 				}
 				up++;
@@ -116,70 +94,49 @@ int partition(std::vector<Movie> &movie_list, int low, int high, std::string fil
 		//decrement until down less than pivot
 		for (int i = high; i > low; i--) {
 			if (filter == "id" || filter == "ID" || filter == "Id") {
-				if (descending && movie_list[down].movieID > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].movieID < pivot) {
+				if ((descending && movie_list[down].movieID > pivot) || (!descending && movie_list[down].movieID < pivot)) {
 					break;
 				}
 				down--;
 			}
 
 			else if (filter == "budget" || filter == "Budget") {
-				if (descending && movie_list[down].movieBudget > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].movieBudget < pivot) {
+				if ((descending && movie_list[down].movieBudget > pivot) || (!descending && movie_list[down].movieBudget < pivot)) {
 					break;
 				}
 				down--;
 			}
 
 			else if (filter == "revenue" || filter == "Revenue") {
-				if (descending && movie_list[down].movieRevenue > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].movieRevenue < pivot) {
+				if ((descending && movie_list[down].movieRevenue > pivot) || (!descending && movie_list[down].movieRevenue < pivot)) {
 					break;
 				}
 				down--;
 			}
 
 			else if (filter == "runtime" || filter == "Runtime") {
-				if (descending && movie_list[down].movieRuntime > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].movieRuntime < pivot) {
+				if ((descending && movie_list[down].movieRuntime > pivot) || (!descending && movie_list[down].movieRuntime < pivot)) {
 					break;
 				}
 				down--;
 			}
 
 			else if (filter == "vote average" || filter == "Vote Average" || filter == "Vote average") {
-				if (descending && movie_list[down].voteAverage > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].voteAverage < pivot) {
+				if ((descending && movie_list[down].voteAverage > pivot) || (!descending && movie_list[down].voteAverage < pivot)) {
 					break;
 				}
 				down--;
 			}
 
 			else if (filter == "vote count" || filter == "Vote Count" || filter == "Vote count") {
-				if (descending && movie_list[down].voteCount > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].voteCount < pivot) {
+				if ((descending && movie_list[down].voteCount > pivot) || (!descending && movie_list[down].voteCount < pivot)) {
 					break;
 				}
 				down--;
 			}
 
 			else {
-				if (descending && movie_list[down].popularityScore > pivot) {
-					break;
-				}
-				else if (!descending && movie_list[down].popularityScore < pivot) {
+				if ((descending && movie_list[down].popularityScore > pivot) || (!descending && movie_list[down].popularityScore < pivot)) {
 					break;
 				}
 				down--;
