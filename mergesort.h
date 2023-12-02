@@ -29,20 +29,9 @@ void merge(std::vector<Movie> &movie_list, int left, int middle, int right, std:
 	int k = left; //merged subarray index
 
 	while (i < left_subarray_size && j < right_subarray_size) {
-		//for each search filter: id, popularity, budget, revenue, runtime
-		if (filter == "id" || filter == "ID" || filter == "Id") {
-			//sort by descending order or ascending order, respectively
-			if ((descending && left_subarray[i].movieID >= right_subarray[j].movieID) || (!descending && left_subarray[i].movieID <= right_subarray[j].movieID)) {
-				movie_list[k] = left_subarray[i];
-				i++;
-			}
-			else {
-				movie_list[k] = right_subarray[j];
-				j++;
-			}
-		}
-		
-		else if (filter == "budget" || filter == "Budget") {
+		//for each search filter: budget, revenue, runtime, vote average, and popularity
+		if (filter == "budget" || filter == "Budget") {
+			//sort by descending order or ascending order
 			if ((descending && left_subarray[i].movieBudget >= right_subarray[j].movieBudget) || (!descending && left_subarray[i].movieBudget <= right_subarray[j].movieBudget)) {
 				movie_list[k] = left_subarray[i];
 				i++;
@@ -66,6 +55,17 @@ void merge(std::vector<Movie> &movie_list, int left, int middle, int right, std:
 
 		else if (filter == "runtime" || filter == "Runtime") {
 			if ((descending && left_subarray[i].movieRuntime >= right_subarray[j].movieRuntime) || (!descending && left_subarray[i].movieRuntime <= right_subarray[j].movieRuntime)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
+		}
+
+		else if (filter == "vote average" || filter == "Vote Average" || filter == "Vote average") {
+			if ((descending && left_subarray[i].voteAverage >= right_subarray[j].voteAverage) || (!descending && left_subarray[i].voteAverage <= right_subarray[j].voteAverage)) {
 				movie_list[k] = left_subarray[i];
 				i++;
 			}
