@@ -3,11 +3,10 @@
 #include <vector>
 
 //sourced from Prof. Aman's presentation "6 - Sorting.pdf" slides 88-90
-void merge(std::vector<Movie> &movie_list, int left, int middle, int right);
-void mergeSort(std::vector<Movie> &movie_list, int left, int right);
+void merge(std::vector<Movie> &movie_list, int left, int middle, int right, std::string filter, bool descending);
+void mergeSort(std::vector<Movie> &movie_list, int left, int right, std::string filter, bool descending);
 
-//sorted by movie popularity score in descending order (highest to lowest popularity score)
-void merge(std::vector<Movie> &movie_list, int left, int middle, int right) {
+void merge(std::vector<Movie> &movie_list, int left, int middle, int right, std::string filter, bool descending) {
 	//split array in half
 	int left_subarray_size = middle - left + 1;
 	int right_subarray_size = right - middle;
@@ -25,20 +24,88 @@ void merge(std::vector<Movie> &movie_list, int left, int middle, int right) {
 	}
 
 	//comparing and combining both subarrays
-	int i = 0;
-	int j = 0;
-	int k = left;
+	int i = 0; //left subarray index
+	int j = 0; //right subarray index
+	int k = left; //merged subarray index
 
 	while (i < left_subarray_size && j < right_subarray_size) {
-		//comparing and ordering movie with higher popularity score
-		if (left_subarray[i].popularityScore >= right_subarray[j].popularityScore) {
-			movie_list[k] = left_subarray[i];
-			i++;
+		//comparing and ordering movies by different filters: id, popularity, budget, revenue, runtime, vote average, and vote count
+		if (filter == "id" || filter == "ID" || filter == "Id") {
+			//sort by descending order or ascending order, respectively
+			if ((descending && left_subarray[i].movieID >= right_subarray[j].movieID) || (!descending && left_subarray[i].movieID <= right_subarray[j].movieID)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
+		}
+		
+		else if (filter == "budget" || filter == "Budget") {
+			if ((descending && left_subarray[i].movieBudget >= right_subarray[j].movieBudget) || (!descending && left_subarray[i].movieBudget <= right_subarray[j].movieBudget)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
+		}
+
+		else if (filter == "revenue" || filter == "Revenue") {
+			if ((descending && left_subarray[i].movieRevenue >= right_subarray[j].movieRevenue) || (!descending && left_subarray[i].movieRevenue <= right_subarray[j].movieRevenue)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
+		}
+
+		else if (filter == "runtime" || filter == "Runtime") {
+			if ((descending && left_subarray[i].movieRuntime >= right_subarray[j].movieRuntime) || (!descending && left_subarray[i].movieRuntime <= right_subarray[j].movieRuntime)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
+		}
+
+		else if (filter == "vote average" || filter == "Vote Average" || filter == "Vote average") {
+			if ((descending && left_subarray[i].voteAverage >= right_subarray[j].voteAverage) || (!descending && left_subarray[i].voteAverage <= right_subarray[j].voteAverage)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
+		}
+
+		else if (filter == "vote count" || filter == "Vote Count" || filter == "Vote count") {
+			if ((descending && left_subarray[i].voteCount >= right_subarray[j].voteCount) || (!descending && left_subarray[i].voteCount <= right_subarray[j].voteCount)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
 		}
 
 		else {
-			movie_list[k] = right_subarray[j];
-			j++;
+			if ((descending && left_subarray[i].popularityScore >= right_subarray[j].popularityScore) || (!descending && left_subarray[i].popularityScore <= right_subarray[j].popularityScore)) {
+				movie_list[k] = left_subarray[i];
+				i++;
+			}
+			else {
+				movie_list[k] = right_subarray[j];
+				j++;
+			}
 		}
 
 		k++;
@@ -59,12 +126,12 @@ void merge(std::vector<Movie> &movie_list, int left, int middle, int right) {
 }
 
 //partition and merge the subarrays
-void mergeSort(std::vector<Movie> &movie_list, int left, int right) {
+void mergeSort(std::vector<Movie> &movie_list, int left, int right, std::string filter, bool descending) {
 	if (left < right) {
 		int middle = left + (right - left) / 2;
-		mergeSort(movie_list, left, middle);
-		mergeSort(movie_list, middle+1, right);
+		mergeSort(movie_list, left, middle, filter, descending);
+		mergeSort(movie_list, middle+1, right, filter, descending);
 
-		merge(movie_list, left, middle, right);
+		merge(movie_list, left, middle, right, filter, descending);
 	}
 }
