@@ -29,7 +29,7 @@ void merge(std::vector<Movie> &movie_list, int left, int middle, int right, std:
 	int k = left; //merged subarray index
 
 	while (i < left_subarray_size && j < right_subarray_size) {
-		//comparing and ordering movies by different filters: id, popularity, budget, revenue, runtime, vote average, and vote count
+		//for each search filter: id, popularity, budget, revenue, runtime, vote average, and vote count
 		if (filter == "id" || filter == "ID" || filter == "Id") {
 			//sort by descending order or ascending order, respectively
 			if ((descending && left_subarray[i].movieID >= right_subarray[j].movieID) || (!descending && left_subarray[i].movieID <= right_subarray[j].movieID)) {
