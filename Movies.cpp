@@ -7,7 +7,7 @@ Movies::Movies() {
 
 void Movies::populateMovieList() {
 
-	std::fstream file("movies.csv");
+	std::fstream file("./movies.csv");
 
 	std::string row;
 

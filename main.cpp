@@ -4,7 +4,10 @@
 #include "Movies.h"
 #include "mergesort.h"
 #include "quicksort.h"
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
+typedef high_resolution_clock Clock;
 
 // function prototypes
 void setText(sf::Text &text, float x, float y);
@@ -199,9 +202,76 @@ int main() {
         bool filter4Pressed = false;
         bool filter5Pressed = false;
 
+        // initialize variables used to determine if filter is pressed for the first time
+        bool filter1Toggle = true;
+        bool filter2Toggle = false;
+        bool filter3Toggle = false;
+        bool filter4Toggle = false;
+        bool filter5Toggle = false;
+
         // initialize variables used to determine what type of sort is done
         bool mergePressed = true;
         bool quickPressed = false;
+
+        // initialize variables used for first filter
+        string mergePopularity;
+        string mergePopularityTime;
+        string quickPopularity;
+        string quickPopularityTime;
+
+        // initialize variables used for second filter
+        string mergeRevenue;
+        string mergeRevenueTime;
+        string quickRevenue;
+        string quickRevenueTime;
+
+        // initialize variables used for third filter
+        string mergeBudget;
+        string mergeBudgetTime;
+        string quickBudget;
+        string quickBudgetTime;
+
+        // initialize variables used for fourth filter
+        string mergeRuntime;
+        string mergeRuntimeTime;
+        string quickRuntime;
+        string quickRuntimeTime;
+
+        // initialize variables used for fifth filter
+        string mergeAvg;
+        string mergeAvgTime;
+        string quickAvg;
+        string quickAvgTime;
+
+        // show the loading screen temporarily
+        menuScreen.clear(sf::Color::Black);
+        sf::Text loadingText;
+        loadingText.setFont(font);
+        loadingText.setString("Loading data...");
+        loadingText.setCharacterSize(25);
+        loadingText.setStyle(sf::Text::Bold);
+        loadingText.setFillColor(sf::Color::White);
+        float loadingTextX = ((float) 400);
+        float loadingTextY = ((float) 325);
+        setText(loadingText, loadingTextX, loadingTextY);
+        menuScreen.draw(loadingText);
+        menuScreen.display();
+
+        // initialize movies dataset
+        Movies dataset;
+
+        // get quick sorted by popularity
+        //quickSort(dataset.movies, 0, dataset.movies.size() - 1, "popularity", true);
+        /*string quickPopularity = "Top 10 Movies:\n\n1. " + dataset.movies[0].movieName + "\n\n"\
+                                 "2. " + dataset.movies[1].movieName + "\n\n"
+                                 "3. " + dataset.movies[2].movieName + "\n\n"
+                                 "4. " + dataset.movies[3].movieName + "\n\n"
+                                 "5. " + dataset.movies[4].movieName + "\n\n"
+                                 "6. " + dataset.movies[5].movieName + "\n\n"
+                                 "7. " + dataset.movies[6].movieName + "\n\n"
+                                 "8. " + dataset.movies[7].movieName + "\n\n"
+                                 "9. " + dataset.movies[8].movieName + "\n\n"
+                                 "10. " + dataset.movies[9].movieName + "\n\n";*/
 
         // while menu screen is open
         while(menuScreen.isOpen()) {
@@ -409,6 +479,11 @@ int main() {
                                 filter3Pressed = false;
                                 filter4Pressed = false;
                                 filter5Pressed = false;
+                                filter1Toggle = true;
+                                filter2Toggle = false;
+                                filter3Toggle = false;
+                                filter4Toggle = false;
+                                filter5Toggle = false;
 
                             }
 
@@ -420,6 +495,11 @@ int main() {
                                 filter3Pressed = false;
                                 filter4Pressed = false;
                                 filter5Pressed = false;
+                                filter1Toggle = false;
+                                filter2Toggle = true;
+                                filter3Toggle = false;
+                                filter4Toggle = false;
+                                filter5Toggle = false;
 
                             }
 
@@ -431,6 +511,11 @@ int main() {
                                 filter3Pressed = true;
                                 filter4Pressed = false;
                                 filter5Pressed = false;
+                                filter1Toggle = false;
+                                filter2Toggle = false;
+                                filter3Toggle = true;
+                                filter4Toggle = false;
+                                filter5Toggle = false;
 
                             }
 
@@ -442,6 +527,11 @@ int main() {
                                 filter3Pressed = false;
                                 filter4Pressed = true;
                                 filter5Pressed = false;
+                                filter1Toggle = false;
+                                filter2Toggle = false;
+                                filter3Toggle = false;
+                                filter4Toggle = true;
+                                filter5Toggle = false;
 
                             }
 
@@ -453,6 +543,11 @@ int main() {
                                 filter3Pressed = false;
                                 filter4Pressed = false;
                                 filter5Pressed = true;
+                                filter1Toggle = false;
+                                filter2Toggle = false;
+                                filter3Toggle = false;
+                                filter4Toggle = false;
+                                filter5Toggle = true;
 
                             }
 
@@ -914,15 +1009,65 @@ int main() {
                     setText(selectedFilterText, 135, 262.5);
                     menuScreen.draw(selectedFilterText);
 
-                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
                     if(mergePressed) {
 
-                        // !! MERGE SORT OF POPULARITY !!
+                        // check if selecting button for first time
+                        if(filter1Toggle) {
+
+                            // show loading data text
+                            sf::Text Text;
+                            setText(Text, 350, 200);
+                            Text.setFont(font);
+                            Text.setString("Loading data...");
+                            Text.setCharacterSize(17);
+                            Text.setStyle(sf::Text::Bold);
+                            Text.setFillColor(sf::Color::White);
+                            menuScreen.draw(Text);
+                            menuScreen.display();
+
+                            // get merge sorted by popularity
+                            auto t1 = Clock::now();
+                            mergeSort(dataset.movies, 0, dataset.movies.size() - 1, "popularity", true);
+                            auto t2 = Clock::now();
+                            mergePopularity = "Top 10 Movies:\n\n1. " + dataset.movies[0].movieName + "\n\n"\
+                                 "2. " + dataset.movies[1].movieName + "\n\n"
+                                 "3. " + dataset.movies[2].movieName + "\n\n"
+                                 "4. " + dataset.movies[3].movieName + "\n\n"
+                                 "5. " + dataset.movies[4].movieName + "\n\n"
+                                 "6. " + dataset.movies[5].movieName + "\n\n"
+                                 "7. " + dataset.movies[6].movieName + "\n\n"
+                                 "8. " + dataset.movies[7].movieName + "\n\n"
+                                 "9. " + dataset.movies[8].movieName + "\n\n"
+                                 "10. " + dataset.movies[9].movieName + "\n\n";
+                            mergePopularityTime = to_string(duration_cast<seconds>(t2 - t1).count());
+
+                            filter1Toggle = false;
+
+                        }
+
+                        // display top 10 movies by popularity - merge sort
+                        sf::Text Text;
+                        setText(Text, 350, 200);
+                        Text.setFont(font);
+                        Text.setString(mergePopularity);
+                        Text.setCharacterSize(17);
+                        Text.setStyle(sf::Text::Bold);
+                        Text.setFillColor(sf::Color::White);
+                        menuScreen.draw(Text);
+
+                        // display time it took
+                        sf::Text Time;
+                        setText(Time, 350, 637.5);
+                        Time.setFont(font);
+                        Time.setString("Time taken to sort: " + mergePopularityTime + " seconds");
+                        Time.setCharacterSize(17);
+                        Time.setStyle(sf::Text::Bold);
+                        Time.setFillColor(sf::Color::White);
+                        menuScreen.draw(Time);
 
                     }
                     else {
 
-                        // !! QUICK SORT OF POPULARITY !!
 
                     }
                 }
@@ -933,10 +1078,61 @@ int main() {
                     setText(selectedFilterText, 135, 362.5);
                     menuScreen.draw(selectedFilterText);
 
-                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
                     if(mergePressed) {
 
-                        // !! MERGE SORT OF REVENUE !!
+                        // check if selecting button for first time
+                        if(filter2Toggle) {
+
+                            // show loading data text
+                            sf::Text Text;
+                            setText(Text, 350, 200);
+                            Text.setFont(font);
+                            Text.setString("Loading data...");
+                            Text.setCharacterSize(17);
+                            Text.setStyle(sf::Text::Bold);
+                            Text.setFillColor(sf::Color::White);
+                            menuScreen.draw(Text);
+                            menuScreen.display();
+
+                            // get merge sorted by revenue
+                            auto t1 = Clock::now();
+                            mergeSort(dataset.movies, 0, dataset.movies.size() - 1, "revenue", true);
+                            auto t2 = Clock::now();
+                            mergeRevenue = "Top 10 Movies:\n\n1. " + dataset.movies[0].movieName + "\n\n"\
+                                  "2. " + dataset.movies[1].movieName + "\n\n"
+                                  "3. " + dataset.movies[2].movieName + "\n\n"
+                                  "4. " + dataset.movies[3].movieName + "\n\n"
+                                  "5. " + dataset.movies[4].movieName + "\n\n"
+                                  "6. " + dataset.movies[5].movieName + "\n\n"
+                                  "7. " + dataset.movies[6].movieName + "\n\n"
+                                  "8. " + dataset.movies[7].movieName + "\n\n"
+                                  "9. " + dataset.movies[8].movieName + "\n\n"
+                                  "10. " + dataset.movies[9].movieName + "\n\n";
+                            mergeRevenueTime = to_string(duration_cast<seconds>(t2 - t1).count());
+
+                            filter2Toggle = false;
+
+                        }
+
+                        // display top 10 movies by revenue - merge sort
+                        sf::Text Text;
+                        setText(Text, 350, 200);
+                        Text.setFont(font);
+                        Text.setString(mergeRevenue);
+                        Text.setCharacterSize(12);
+                        Text.setStyle(sf::Text::Bold);
+                        Text.setFillColor(sf::Color::White);
+                        menuScreen.draw(Text);
+
+                        // display time it took
+                        sf::Text Time;
+                        setText(Time, 350, 637.5);
+                        Time.setFont(font);
+                        Time.setString("Time taken to sort: " + mergeRevenueTime + " seconds");
+                        Time.setCharacterSize(17);
+                        Time.setStyle(sf::Text::Bold);
+                        Time.setFillColor(sf::Color::White);
+                        menuScreen.draw(Time);
 
                     }
                     else {
@@ -952,10 +1148,61 @@ int main() {
                     setText(selectedFilterText, 135, 462.5);
                     menuScreen.draw(selectedFilterText);
 
-                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
                     if(mergePressed) {
 
-                        // !! MERGE SORT OF BUDGET !!
+                        // check if selecting button for first time
+                        if(filter3Toggle) {
+
+                            // show loading data text
+                            sf::Text Text;
+                            setText(Text, 350, 200);
+                            Text.setFont(font);
+                            Text.setString("Loading data...");
+                            Text.setCharacterSize(17);
+                            Text.setStyle(sf::Text::Bold);
+                            Text.setFillColor(sf::Color::White);
+                            menuScreen.draw(Text);
+                            menuScreen.display();
+
+                            // get merge sorted by budget
+                            auto t1 = Clock::now();
+                            mergeSort(dataset.movies, 0, dataset.movies.size() - 1, "budget", true);
+                            auto t2 = Clock::now();
+                            mergeBudget = "Top 10 Movies:\n\n1. " + dataset.movies[0].movieName + "\n\n"\
+                                  "2. " + dataset.movies[1].movieName + "\n\n"
+                                  "3. " + dataset.movies[2].movieName + "\n\n"
+                                  "4. " + dataset.movies[3].movieName + "\n\n"
+                                  "5. " + dataset.movies[4].movieName + "\n\n"
+                                  "6. " + dataset.movies[5].movieName + "\n\n"
+                                  "7. " + dataset.movies[6].movieName + "\n\n"
+                                  "8. " + dataset.movies[7].movieName + "\n\n"
+                                  "9. " + dataset.movies[8].movieName + "\n\n"
+                                  "10. " + dataset.movies[9].movieName + "\n\n";
+                            mergeBudgetTime = to_string(duration_cast<seconds>(t2 - t1).count());
+
+                            filter3Toggle = false;
+
+                        }
+
+                        // display top 10 movies by revenue - merge sort
+                        sf::Text Text;
+                        setText(Text, 350, 200);
+                        Text.setFont(font);
+                        Text.setString(mergeBudget);
+                        Text.setCharacterSize(14);
+                        Text.setStyle(sf::Text::Bold);
+                        Text.setFillColor(sf::Color::White);
+                        menuScreen.draw(Text);
+
+                        // display time it took
+                        sf::Text Time;
+                        setText(Time, 350, 637.5);
+                        Time.setFont(font);
+                        Time.setString("Time taken to sort: " + mergeBudgetTime + " seconds");
+                        Time.setCharacterSize(17);
+                        Time.setStyle(sf::Text::Bold);
+                        Time.setFillColor(sf::Color::White);
+                        menuScreen.draw(Time);
 
                     }
                     else {
@@ -971,10 +1218,61 @@ int main() {
                     setText(selectedFilterText, 135, 562.5);
                     menuScreen.draw(selectedFilterText);
 
-                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
                     if(mergePressed) {
 
-                        // !! MERGE SORT OF RUNTIME !!
+                        // check if selecting button for first time
+                        if(filter4Toggle) {
+
+                            // show loading data text
+                            sf::Text Text;
+                            setText(Text, 350, 200);
+                            Text.setFont(font);
+                            Text.setString("Loading data...");
+                            Text.setCharacterSize(17);
+                            Text.setStyle(sf::Text::Bold);
+                            Text.setFillColor(sf::Color::White);
+                            menuScreen.draw(Text);
+                            menuScreen.display();
+
+                            // get merge sorted by runtime
+                            auto t1 = Clock::now();
+                            mergeSort(dataset.movies, 0, dataset.movies.size() - 1, "runtime", true);
+                            auto t2 = Clock::now();
+                            mergeRuntime = "Top 10 Movies:\n\n1. " + dataset.movies[0].movieName + "\n\n"\
+                                  "2. " + dataset.movies[1].movieName + "\n\n"
+                                  "3. " + dataset.movies[2].movieName + "\n\n"
+                                  "4. " + dataset.movies[3].movieName + "\n\n"
+                                  "5. " + dataset.movies[4].movieName + "\n\n"
+                                  "6. " + dataset.movies[5].movieName + "\n\n"
+                                  "7. " + dataset.movies[6].movieName + "\n\n"
+                                  "8. " + dataset.movies[7].movieName + "\n\n"
+                                  "9. " + dataset.movies[8].movieName + "\n\n"
+                                  "10. " + dataset.movies[9].movieName + "\n\n";
+                            mergeRuntimeTime = to_string(duration_cast<seconds>(t2 - t1).count());
+
+                            filter4Toggle = false;
+
+                        }
+
+                        // display top 10 movies by runtime - merge sort
+                        sf::Text Text;
+                        setText(Text, 350, 200);
+                        Text.setFont(font);
+                        Text.setString(mergeRuntime);
+                        Text.setCharacterSize(12);
+                        Text.setStyle(sf::Text::Bold);
+                        Text.setFillColor(sf::Color::White);
+                        menuScreen.draw(Text);
+
+                        // display time it took
+                        sf::Text Time;
+                        setText(Time, 350, 637.5);
+                        Time.setFont(font);
+                        Time.setString("Time taken to sort: " + mergeRuntimeTime + " seconds");
+                        Time.setCharacterSize(17);
+                        Time.setStyle(sf::Text::Bold);
+                        Time.setFillColor(sf::Color::White);
+                        menuScreen.draw(Time);
 
                     }
                     else {
@@ -990,10 +1288,61 @@ int main() {
                     setText(selectedFilterText, 135, 662.5);
                     menuScreen.draw(selectedFilterText);
 
-                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
                     if(mergePressed) {
 
-                        // !! MERGE SORT OF AVG SCORE !!
+                        // check if selecting button for first time
+                        if(filter5Toggle) {
+
+                            // show loading data text
+                            sf::Text Text;
+                            setText(Text, 350, 200);
+                            Text.setFont(font);
+                            Text.setString("Loading data...");
+                            Text.setCharacterSize(17);
+                            Text.setStyle(sf::Text::Bold);
+                            Text.setFillColor(sf::Color::White);
+                            menuScreen.draw(Text);
+                            menuScreen.display();
+
+                            // get merge sorted by avg score
+                            auto t1 = Clock::now();
+                            mergeSort(dataset.movies, 0, dataset.movies.size() - 1, "voter average", true);
+                            auto t2 = Clock::now();
+                            mergeAvg = "Top 10 Movies:\n\n1. " + dataset.movies[0].movieName + "\n\n"\
+                                  "2. " + dataset.movies[1].movieName + "\n\n"
+                                  "3. " + dataset.movies[2].movieName + "\n\n"
+                                  "4. " + dataset.movies[3].movieName + "\n\n"
+                                  "5. " + dataset.movies[4].movieName + "\n\n"
+                                  "6. " + dataset.movies[5].movieName + "\n\n"
+                                  "7. " + dataset.movies[6].movieName + "\n\n"
+                                  "8. " + dataset.movies[7].movieName + "\n\n"
+                                  "9. " + dataset.movies[8].movieName + "\n\n"
+                                  "10. " + dataset.movies[9].movieName + "\n\n";
+                            mergeAvgTime = to_string(duration_cast<seconds>(t2 - t1).count());
+
+                            filter5Toggle = false;
+
+                        }
+
+                        // display top 10 movies by voter average - merge sort
+                        sf::Text Text;
+                        setText(Text, 350, 200);
+                        Text.setFont(font);
+                        Text.setString(mergeAvg);
+                        Text.setCharacterSize(17);
+                        Text.setStyle(sf::Text::Bold);
+                        Text.setFillColor(sf::Color::White);
+                        menuScreen.draw(Text);
+
+                        // display time it took
+                        sf::Text Time;
+                        setText(Time, 350, 637.5);
+                        Time.setFont(font);
+                        Time.setString("Time taken to sort: " + mergeAvgTime + " seconds");
+                        Time.setCharacterSize(17);
+                        Time.setStyle(sf::Text::Bold);
+                        Time.setFillColor(sf::Color::White);
+                        menuScreen.draw(Time);
 
                     }
                     else {
