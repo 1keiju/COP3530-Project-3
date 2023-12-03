@@ -686,10 +686,6 @@ int main() {
                     setText(selectedFilterText, 135, 562.5);
                     menuScreen.draw(selectedFilterText);
 
-                    // show filter is selected
-                    setText(selectedFilterText, 135, 462.5);
-                    menuScreen.draw(selectedFilterText);
-
                     // display top 10 movies by NY Times
                     sf::Text NYText;
                     setText(NYText, 350, 200);
