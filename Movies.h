@@ -13,16 +13,16 @@ struct Movie {
 	std::vector<std::string> genreList;
 	std::string movieLanguage;
 	std::string movieOverview;
-	long int popularityScore;
+	double popularityScore;
 	std::string productionStudio;
 	std::string releaseDate;
-	long int movieBudget;
-	long int movieRevenue;
+	double movieBudget;
+	double movieRevenue;
 	int movieRuntime;
 	bool movieReleased;
 	std::string movieTagline;
-	long int voteAverage;
-	long int voteCount;
+	double voteAverage;
+	double voteCount;
 	std::string creditsSTR;
 	std::vector<std::string> movieCredits; //
 	std::string movieKeywords;
