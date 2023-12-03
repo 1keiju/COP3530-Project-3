@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Movies.h"
 #include <vector>
+#pragma once
 
 //sourced from Prof. Aman's presentation "6 - Sorting.pdf" slides 121-122
 int partition(std::vector<Movie> &movie_list, int low, int high, std::string filter, bool descending);

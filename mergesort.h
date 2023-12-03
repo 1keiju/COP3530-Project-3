@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Movies.h"
 #include <vector>
+#pragma once
 
 //sourced from Prof. Aman's presentation "6 - Sorting.pdf" slides 88-90
 void merge(std::vector<Movie> &movie_list, int left, int middle, int right, std::string filter, bool descending);

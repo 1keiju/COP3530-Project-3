@@ -1,6 +1,9 @@
 // include libraries, headers, etc.
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Movies.h"
+#include "mergesort.h"
+#include "quicksort.h"
 using namespace std;
 
 // function prototypes
@@ -182,7 +185,14 @@ int main() {
         bool button3Pressed = false;
         bool button4Pressed = false;
 
-        // initialize variables used to determine what filter is selected
+        // initialize variables used to determine what filter is selected for top movie
+        bool topMovie1Pressed = true;
+        bool topMovie2Pressed = false;
+        bool topMovie3Pressed = false;
+        bool topMovie4Pressed = false;
+        bool topMovie5Pressed = false;
+
+        // initialize variables used to determine what filter is selected for sort
         bool filter1Pressed = true;
         bool filter2Pressed = false;
         bool filter3Pressed = false;
@@ -215,8 +225,8 @@ int main() {
             button2.setFillColor(sf::Color::White);
             sf::Text button2Text;
             button2Text.setFont(font);
-            button2Text.setString("Top Movies");
-            button2Text.setCharacterSize(25);
+            button2Text.setString("Top Movies 2023");
+            button2Text.setCharacterSize(17);
             button2Text.setStyle(sf::Text::Bold);
             button2Text.setFillColor(sf::Color::Black);
             float button2TextX = ((float) 300);
@@ -317,6 +327,68 @@ int main() {
                             button3Pressed = false;
                             button4Pressed = true;
 
+                        }
+                    }
+
+                    // if on top movies menu, check if a filter is clicked on
+                    if(button2Pressed) {
+
+                        if(20 < position.x && position.x < 270) {
+
+                            // check if mouse is in filter 1
+                            if (200 < position.y && position.y < 275) {
+
+                                topMovie1Pressed = true;
+                                topMovie2Pressed = false;
+                                topMovie3Pressed = false;
+                                topMovie4Pressed = false;
+                                topMovie5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 2
+                            if (300 < position.y && position.y < 375) {
+
+                                topMovie1Pressed = false;
+                                topMovie2Pressed = true;
+                                topMovie3Pressed = false;
+                                topMovie4Pressed = false;
+                                topMovie5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 3
+                            if (400 < position.y && position.y < 475) {
+
+                                topMovie1Pressed = false;
+                                topMovie2Pressed = false;
+                                topMovie3Pressed = true;
+                                topMovie4Pressed = false;
+                                topMovie5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 4
+                            if (500 < position.y && position.y < 575) {
+
+                                topMovie1Pressed = false;
+                                topMovie2Pressed = false;
+                                topMovie3Pressed = false;
+                                topMovie4Pressed = true;
+                                topMovie5Pressed = false;
+
+                            }
+
+                            // check if mouse is in filter 5
+                            if (600 < position.y && position.y < 675) {
+
+                                topMovie1Pressed = false;
+                                topMovie2Pressed = false;
+                                topMovie3Pressed = false;
+                                topMovie4Pressed = false;
+                                topMovie5Pressed = true;
+
+                            }
                         }
                     }
 
@@ -452,6 +524,209 @@ int main() {
                 setText(selectedText, 300, 75);
                 menuScreen.draw(selectedText);
 
+                // button for imdb filter
+                sf::RectangleShape filter1(sf::Vector2f(250, 75));
+                filter1.setPosition(20, 200);
+                filter1.setOutlineThickness(10);
+                filter1.setOutlineColor(sf::Color(255, 127, 0));
+                filter1.setFillColor(sf::Color::White);
+                sf::Text filter1Text;
+                filter1Text.setFont(font);
+                filter1Text.setString("IMDb");
+                filter1Text.setCharacterSize(20);
+                filter1Text.setStyle(sf::Text::Bold);
+                filter1Text.setFillColor(sf::Color::Black);
+                float filter1TextX = ((float) 135);
+                float filter1TextY = ((float) 237.5);
+                setText(filter1Text, filter1TextX, filter1TextY);
+                menuScreen.draw(filter1);
+                menuScreen.draw(filter1Text);
+
+                // button for rotten tomatoes filter
+                sf::RectangleShape filter2(sf::Vector2f(250, 75));
+                filter2.setPosition(20, 300);
+                filter2.setOutlineThickness(10);
+                filter2.setOutlineColor(sf::Color(255, 127, 0));
+                filter2.setFillColor(sf::Color::White);
+                sf::Text filter2Text;
+                filter2Text.setFont(font);
+                filter2Text.setString("Rotten Tomatoes");
+                filter2Text.setCharacterSize(20);
+                filter2Text.setStyle(sf::Text::Bold);
+                filter2Text.setFillColor(sf::Color::Black);
+                float filter2TextX = ((float) 135);
+                float filter2TextY = ((float) 337.5);
+                setText(filter2Text, filter2TextX, filter2TextY);
+                menuScreen.draw(filter2);
+                menuScreen.draw(filter2Text);
+
+                // button for NY times filter
+                sf::RectangleShape filter3(sf::Vector2f(250, 75));
+                filter3.setPosition(20, 400);
+                filter3.setOutlineThickness(10);
+                filter3.setOutlineColor(sf::Color(255, 127, 0));
+                filter3.setFillColor(sf::Color::White);
+                sf::Text filter3Text;
+                filter3Text.setFont(font);
+                filter3Text.setString("NY Times");
+                filter3Text.setCharacterSize(20);
+                filter3Text.setStyle(sf::Text::Bold);
+                filter3Text.setFillColor(sf::Color::Black);
+                float filter3TextX = ((float) 135);
+                float filter3TextY = ((float) 437.5);
+                setText(filter3Text, filter3TextX, filter3TextY);
+                menuScreen.draw(filter3);
+                menuScreen.draw(filter3Text);
+
+                // button for the new yorker filter
+                sf::RectangleShape filter4(sf::Vector2f(250, 75));
+                filter4.setPosition(20, 500);
+                filter4.setOutlineThickness(10);
+                filter4.setOutlineColor(sf::Color(255, 127, 0));
+                filter4.setFillColor(sf::Color::White);
+                sf::Text filter4Text;
+                filter4Text.setFont(font);
+                filter4Text.setString("The New Yorker");
+                filter4Text.setCharacterSize(20);
+                filter4Text.setStyle(sf::Text::Bold);
+                filter4Text.setFillColor(sf::Color::Black);
+                float filter4TextX = ((float) 135);
+                float filter4TextY = ((float) 537.5);
+                setText(filter4Text, filter4TextX, filter4TextY);
+                menuScreen.draw(filter4);
+                menuScreen.draw(filter4Text);
+
+                // button for TIME filter
+                sf::RectangleShape filter5(sf::Vector2f(250, 75));
+                filter5.setPosition(20, 600);
+                filter5.setOutlineThickness(10);
+                filter5.setOutlineColor(sf::Color(255, 127, 0));
+                filter5.setFillColor(sf::Color::White);
+                sf::Text filter5Text;
+                filter5Text.setFont(font);
+                filter5Text.setString("TIME");
+                filter5Text.setCharacterSize(20);
+                filter5Text.setStyle(sf::Text::Bold);
+                filter5Text.setFillColor(sf::Color::Black);
+                float filter5TextX = ((float) 135);
+                float filter5TextY = ((float) 637.5);
+                setText(filter5Text, filter5TextX, filter5TextY);
+                menuScreen.draw(filter5);
+                menuScreen.draw(filter5Text);
+
+                // check conditions for which filter is selected, then display the appropriate data
+                if(topMovie1Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 262.5);
+                    menuScreen.draw(selectedFilterText);
+
+                    // display top 10 movies by IMBd
+                    sf::Text IMBDText;
+                    setText(IMBDText, 350, 200);
+                    IMBDText.setFont(font);
+                    IMBDText.setString("Top 10 Movies of 2023:\n\n1. Oppenheimer\n\n2. Past Lives\n\n3. Killers of the Flower Moon"
+                                       "\n\n4. Poor Things\n\n5. Anatomy of a Fall\n\n6. Spider Man: Across the Spider-Verse"
+                                       "\n\n7. The Holdovers\n\n8. Mission Impossible - Dead Reckoning"
+                                       "\n\n9. About Dry Grasses\n\n10. John Wick: Chapter 4");
+                    IMBDText.setCharacterSize(17);
+                    IMBDText.setStyle(sf::Text::Bold);
+                    IMBDText.setFillColor(sf::Color::White);
+                    menuScreen.draw(IMBDText);
+
+                }
+
+                if(topMovie2Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 362.5);
+                    menuScreen.draw(selectedFilterText);
+
+                    // display top 10 movies by Rotten Tomatoes
+                    sf::Text tomatoesText;
+                    setText(tomatoesText, 350, 200);
+                    tomatoesText.setFont(font);
+                    tomatoesText.setString("Top 10 Movies of 2023:\n\n1. The First Slam Dunk\n\n2. Shayda\n\n"
+                                           "3. Are You There God? It's Me, Margaret."
+                                           "\n\n4. Fallen Leaves\n\n5. Rye Lane\n\n6. Joyland"
+                                           "\n\n7. Monster\n\n8. The Beasts"
+                                           "\n\n9. Full Time\n\n10. Aloners");
+                    tomatoesText.setCharacterSize(17);
+                    tomatoesText.setStyle(sf::Text::Bold);
+                    tomatoesText.setFillColor(sf::Color::White);
+                    menuScreen.draw(tomatoesText);
+
+                }
+
+                if(topMovie3Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 462.5);
+                    menuScreen.draw(selectedFilterText);
+
+                    // display top 10 movies by NY Times
+                    sf::Text NYTimesText;
+                    setText(NYTimesText, 350, 200);
+                    NYTimesText.setFont(font);
+                    NYTimesText.setString("Top 10 Movies of 2023:\n\n1. Killers of the Flower Moon\n\n2. Oppenheimer\n\n"
+                                           "3. Menus-Plaisirs - Les Troisgros"
+                                           "\n\n4. Occupied City\n\n5. A Thousand and One\n\n6. Asteroid City"
+                                           "\n\n7. May December\n\n8. Showing Up"
+                                           "\n\n9. Orlando: My Political Biography\n\n10. Stonewalling");
+                    NYTimesText.setCharacterSize(17);
+                    NYTimesText.setStyle(sf::Text::Bold);
+                    NYTimesText.setFillColor(sf::Color::White);
+                    menuScreen.draw(NYTimesText);
+
+                }
+
+                if(topMovie4Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 562.5);
+                    menuScreen.draw(selectedFilterText);
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 462.5);
+                    menuScreen.draw(selectedFilterText);
+
+                    // display top 10 movies by NY Times
+                    sf::Text NYText;
+                    setText(NYText, 350, 200);
+                    NYText.setFont(font);
+                    NYText.setString("Top 10 Movies of 2023:\n\n1. Killers of the Flower Moon\n\n2. Asteroid City\n\n"
+                                          "3. Barbie\n\n4. All Dirt Roads Taste of Salt"
+                                          "\n\n5. Showing Up\n\n6. Passages"
+                                          "\n\n7. Civic\n\n8. A Thousand and One"
+                                          "\n\n9. Earth Mama\n\n10. Pinball: The Man Who Saved the Game");
+                    NYText.setCharacterSize(17);
+                    NYText.setStyle(sf::Text::Bold);
+                    NYText.setFillColor(sf::Color::White);
+                    menuScreen.draw(NYText);
+
+                }
+
+                if(topMovie5Pressed) {
+
+                    // show filter is selected
+                    setText(selectedFilterText, 135, 662.5);
+                    menuScreen.draw(selectedFilterText);
+
+                    // display top 10 movies by NY Times
+                    sf::Text timesText;
+                    setText(timesText, 350, 200);
+                    timesText.setFont(font);
+                    timesText.setString("Top 10 Movies of 2023:\n\n1. Fallen Leaves\n\n2. Maestro\n\n"
+                                     "3. The Zone of Interest\n\n4. Priscilla"
+                                     "\n\n5. Revoir Paris\n\n6. Past Lives"
+                                     "\n\n7. Killers of the Flower Moon\n\n8. Are You There God? It's Me, Margaret."
+                                     "\n\n9. Dreamin' Wild\n\n10. Passages");
+                    timesText.setCharacterSize(17);
+                    timesText.setStyle(sf::Text::Bold);
+                    timesText.setFillColor(sf::Color::White);
+                    menuScreen.draw(timesText);
+
+                }
             }
 
             // if button 3, display search screen
