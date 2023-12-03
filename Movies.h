@@ -13,16 +13,16 @@ struct Movie {
 	std::vector<std::string> genreList;
 	std::string movieLanguage;
 	std::string movieOverview;
-	double popularityScore;
+	long int popularityScore;
 	std::string productionStudio;
 	std::string releaseDate;
-	double movieBudget;
-	double movieRevenue;
+	long int movieBudget;
+	long int movieRevenue;
 	int movieRuntime;
 	bool movieReleased;
 	std::string movieTagline;
-	double voteAverage;
-	double voteCount;
+	long int voteAverage;
+	long int voteCount;
 	std::string creditsSTR;
 	std::vector<std::string> movieCredits; //
 	std::string movieKeywords;
@@ -32,7 +32,7 @@ struct Movie {
 	std::vector<std::string> movieRecommendations;
 
 	Movie();
-	Movie(std::string name, double score, double revenue, double budget, int runtime, double average) {
+	Movie(std::string name, long int score, long int revenue, long int budget, int runtime, long int average) {
 
 		// full list of parameters
 		/*int id, std::string name, std::string genres, std::string lang, std::string overview, double score, std::string studio, std::string date, double budget, double revenue, int runtime,
@@ -40,12 +40,12 @@ struct Movie {
 
 		movieName = name;
 		popularityScore = score;
-        movieRevenue = revenue;
-        movieBudget = budget;
-        movieRuntime = runtime;
-        voteAverage = average;
-		
-		/* 
+		movieRevenue = revenue;
+		movieBudget = budget;
+		movieRuntime = runtime;
+		voteAverage = average;
+
+		/*
 		   The following variables were omitted for testing
 		   Make a decision about what data points we want to display
 		   The image URLs could work if we find a way to pull the image from the web to display
@@ -73,8 +73,9 @@ class Movies {
 private:
 	int numMovies;
 public:
-    std::vector<Movie> movies;
+	std::vector<Movie> movies;
 	Movies(); // constructor, grabs data from opened file and uses populateMovieList()
 	void populateMovieList(); // reads .csv file
 	void printMovies();
+	std::string createTopTenList();
 };
