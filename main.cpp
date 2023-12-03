@@ -199,6 +199,10 @@ int main() {
         bool filter4Pressed = false;
         bool filter5Pressed = false;
 
+        // initialize variables used to determine what type of sort is done
+        bool mergePressed = true;
+        bool quickPressed = false;
+
         // while menu screen is open
         while(menuScreen.isOpen()) {
 
@@ -451,6 +455,25 @@ int main() {
                                 filter5Pressed = true;
 
                             }
+
+                            // check if mouse is in merge sort button
+                            if(700 < position.y && position.y < 775) {
+
+                                mergePressed = true;
+                                quickPressed = false;
+
+                            }
+                        }
+
+                        // check if quick sort button is pressed
+                        if(300 < position.x && position.x < 550) {
+
+                            if(700 < position.y && position.y < 775) {
+
+                                mergePressed = false;
+                                quickPressed = true;
+
+                            }
                         }
                     }
                 }
@@ -482,6 +505,14 @@ int main() {
             selectedFilterText.setCharacterSize(12);
             selectedFilterText.setStyle(sf::Text::Bold);
             selectedFilterText.setFillColor(sf::Color::Green);
+
+            // shows user which sort algorithm is selected
+            sf::Text selectedSortText;
+            selectedSortText.setFont(font);
+            selectedSortText.setString("(Selected)");
+            selectedSortText.setCharacterSize(12);
+            selectedSortText.setStyle(sf::Text::Bold);
+            selectedSortText.setFillColor(sf::Color::Green);
 
             // check conditions of which button was last pressed
             // if button 1, display home screen
@@ -613,6 +644,7 @@ int main() {
                 setText(filter5Text, filter5TextX, filter5TextY);
                 menuScreen.draw(filter5);
                 menuScreen.draw(filter5Text);
+
 
                 // check conditions for which filter is selected, then display the appropriate data
                 if(topMovie1Pressed) {
@@ -822,6 +854,59 @@ int main() {
                 menuScreen.draw(filter5);
                 menuScreen.draw(filter5Text);
 
+                // button for merge sort
+                sf::RectangleShape merge(sf::Vector2f(250, 75));
+                merge.setPosition(20, 700);
+                merge.setOutlineThickness(10);
+                merge.setOutlineColor(sf::Color::Blue);
+                merge.setFillColor(sf::Color::White);
+                sf::Text mergeText;
+                mergeText.setFont(font);
+                mergeText.setString("Merge Sort");
+                mergeText.setCharacterSize(20);
+                mergeText.setStyle(sf::Text::Bold);
+                mergeText.setFillColor(sf::Color::Black);
+                float mergeTextX = ((float) 135);
+                float mergeTextY = ((float) 737.5);
+                setText(mergeText, mergeTextX, mergeTextY);
+                menuScreen.draw(merge);
+                menuScreen.draw(mergeText);
+
+                // button for quick sort
+                sf::RectangleShape quick(sf::Vector2f(250, 75));
+                quick.setPosition(300, 700);
+                quick.setOutlineThickness(10);
+                quick.setOutlineColor(sf::Color::Blue);
+                quick.setFillColor(sf::Color::White);
+                sf::Text quickText;
+                quickText.setFont(font);
+                quickText.setString("Quick Sort");
+                quickText.setCharacterSize(20);
+                quickText.setStyle(sf::Text::Bold);
+                quickText.setFillColor(sf::Color::Black);
+                float quickTextX = ((float) 425);
+                float quickTextY = ((float) 737.5);
+                setText(quickText, quickTextX, quickTextY);
+                menuScreen.draw(quick);
+                menuScreen.draw(quickText);
+
+                // check conditions for which sort is selected
+                if(mergePressed) {
+
+                    // show button is selected
+                    setText(selectedSortText, 135, 762.5);
+                    menuScreen.draw(selectedSortText);
+
+                }
+
+                if(quickPressed) {
+
+                    // show button is selected
+                    setText(selectedSortText, 425, 762.5);
+                    menuScreen.draw(selectedSortText);
+
+                }
+
                 // check conditions for which filter is selected, then display the appropriate data
                 if(filter1Pressed) {
 
@@ -829,6 +914,17 @@ int main() {
                     setText(selectedFilterText, 135, 262.5);
                     menuScreen.draw(selectedFilterText);
 
+                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
+                    if(mergePressed) {
+
+                        // !! MERGE SORT OF POPULARITY !!
+
+                    }
+                    else {
+
+                        // !! QUICK SORT OF POPULARITY !!
+
+                    }
                 }
 
                 if(filter2Pressed) {
@@ -837,6 +933,17 @@ int main() {
                     setText(selectedFilterText, 135, 362.5);
                     menuScreen.draw(selectedFilterText);
 
+                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
+                    if(mergePressed) {
+
+                        // !! MERGE SORT OF REVENUE !!
+
+                    }
+                    else {
+
+                        // !! QUICK SORT OF REVENUE !!
+
+                    }
                 }
 
                 if(filter3Pressed) {
@@ -845,6 +952,17 @@ int main() {
                     setText(selectedFilterText, 135, 462.5);
                     menuScreen.draw(selectedFilterText);
 
+                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
+                    if(mergePressed) {
+
+                        // !! MERGE SORT OF BUDGET !!
+
+                    }
+                    else {
+
+                        // !! QUICK SORT OF BUDGET !!
+
+                    }
                 }
 
                 if(filter4Pressed) {
@@ -853,6 +971,17 @@ int main() {
                     setText(selectedFilterText, 135, 562.5);
                     menuScreen.draw(selectedFilterText);
 
+                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
+                    if(mergePressed) {
+
+                        // !! MERGE SORT OF RUNTIME !!
+
+                    }
+                    else {
+
+                        // !! QUICK SORT OF RUNTIME !!
+
+                    }
                 }
 
                 if(filter5Pressed) {
@@ -861,6 +990,17 @@ int main() {
                     setText(selectedFilterText, 135, 662.5);
                     menuScreen.draw(selectedFilterText);
 
+                    // !! CODE NEEDS TO BE ADDED TO GET DATA THEN DISPLAY IT !!
+                    if(mergePressed) {
+
+                        // !! MERGE SORT OF AVG SCORE !!
+
+                    }
+                    else {
+
+                        // !! QUICK SORT OF AVG SCORE !!
+
+                    }
                 }
             }
 
@@ -876,8 +1016,8 @@ int main() {
                 helpText.setString("Help:\n\n Top Movies 2023: Select the source of the\n top ten movies of the year by "
                                    "clicking on\n the filters on the left side of the screen."
                                    "\n\n Sort: Select the filter that you \n want to apply, which sorts a dataset of \n"
-                                   " over 100,000 movies using either quick \n sort (the top three) or merge sort (the"
-                                   " bottom two).");
+                                   " over 100,000 movies using either quick \n sort or merge sort (selected at"
+                                   " the bottom).");
                 helpText.setCharacterSize(20);
                 helpText.setStyle(sf::Text::Bold);
                 helpText.setFillColor(sf::Color::White);
