@@ -871,6 +871,8 @@ int main() {
                 setText(selectedText, 700, 75);
                 menuScreen.draw(selectedText);
 
+
+
             }
 
             menuScreen.display();

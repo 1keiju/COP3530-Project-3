@@ -4,6 +4,7 @@
 #include <set>
 #include <fstream>
 #include <sstream>
+#pragma once
 
 struct Movie {
 	int movieID;
@@ -31,15 +32,18 @@ struct Movie {
 	std::vector<std::string> movieRecommendations;
 
 	Movie();
-	Movie(std::string name, std::string genres, std::string overview) {
+	Movie(std::string name, double score, double revenue, double budget, int runtime, double average) {
 
 		// full list of parameters
 		/*int id, std::string name, std::string genres, std::string lang, std::string overview, double score, std::string studio, std::string date, double budget, double revenue, int runtime,
 	bool released, std::string tagline, double average, double count, std::string keywords, std::string poster, std::string banner*/
 
 		movieName = name;
-		genresSTR = genres;
-		movieOverview = overview;
+		popularityScore = score;
+        movieRevenue = revenue;
+        movieBudget = budget;
+        movieRuntime = runtime;
+        voteAverage = average;
 		
 		/* 
 		   The following variables were omitted for testing

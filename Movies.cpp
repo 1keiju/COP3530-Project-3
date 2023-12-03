@@ -14,8 +14,11 @@ void Movies::populateMovieList() {
 	while (std::getline(file, row)) {
 		// movie variables
 		std::string name;
-		std::string genres;
-		std::string overview;
+		double score;
+        double budget;
+        double revenue;
+        int runtime;
+        double average;
 
 		std::getline(file, row);
 
@@ -32,22 +35,34 @@ void Movies::populateMovieList() {
 		name = token;
 
 		std::getline(stream, token, ','); // reads genres
-		genres = token;
 
 		std::getline(stream, token, ','); // reads language
 
 		std::getline(stream, token, ','); // reads overview
-		overview = token;
 		
-		// std::getline(stream, token, ','); // reads popularity score [DOUBLE]
-		// std::getline(stream, token, ','); // reads production studio
-		// std::getline(stream, token, ','); // reads release date
-		// std::getline(stream, token, ','); // reads budget [DOUBLE]
-		// std::getline(stream, token, ','); // reads revenue [DOUBLE]
-		// std::getline(stream, token, ','); // reads runtime [INT]
-		// std::getline(stream, token, ','); // reads status [BOOL]
-		// std::getline(stream, token, ','); // reads tagline
-		// std::getline(stream, token, ','); // reads vote average [DOUBLE]
+        std::getline(stream, token, ','); // reads popularity score [DOUBLE]
+        score = stod(token);
+
+        std::getline(stream, token, ','); // reads production studio
+
+        std::getline(stream, token, ','); // reads release date
+
+		std::getline(stream, token, ','); // reads budget [DOUBLE]
+        budget = stod(token);
+
+		std::getline(stream, token, ','); // reads revenue [DOUBLE]
+        revenue = stod(token);
+
+		std::getline(stream, token, ','); // reads runtime [INT]
+        runtime = stoi(token);
+
+        std::getline(stream, token, ','); // reads status [BOOL]
+
+		std::getline(stream, token, ','); // reads tagline
+
+		std::getline(stream, token, ','); // reads vote average [DOUBLE]
+        average = stod(token);
+
 		// std::getline(stream, token, ','); // reads vote count [DOUBLE]
 		// std::getline(stream, token, ','); // reads credits
 		// std::getline(stream, token, ','); // reads keywords
@@ -55,7 +70,7 @@ void Movies::populateMovieList() {
 		// std::getline(stream, token, ','); // reads background
 		// std::getline(stream, token, ','); // reads recommendations
 
-		movies.push_back(Movie(name, genres, overview));
+		movies.push_back(Movie(name, score, revenue, budget, runtime, average));
 		numMovies++;
 	}
 }
