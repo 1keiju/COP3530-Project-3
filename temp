@@ -1,0 +1,108 @@
+#include <chrono>
+using namespace std::chrono;
+
+typedef high_resolution_clock Clock;
+
+//referenced from Prof. Aman's presentation "1 - Algorithmic Analysis.pdf" slide 27 and https://www.onlinegdb.com/BJGAP7I5I
+
+//mergesort + popularity selected
+auto t1 = Clock::now();
+mergesort(movies, 0, movies.size() - 1, "popularity", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", " << movies[i - 1].popularityScore << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//mergesort + revenue selected
+auto t1 = Clock::now();
+mergesort(movies, 0, movies.size() - 1, "revenue", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", $" << movies[i - 1].movieRevenue << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//mergesort + budget selected
+auto t1 = Clock::now();
+mergesort(movies, 0, movies.size() - 1, "budget", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", $" << movies[i - 1].movieBudget << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//mergesort + runtime selected
+auto t1 = Clock::now();
+mergesort(movies, 0, movies.size() - 1, "runtime", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", " << movies[i - 1].movieRuntime << " min" << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//mergesort + vote average selected
+auto t1 = Clock::now();
+mergesort(movies, 0, movies.size() - 1, "vote average", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", " << movies[i - 1].voteAverage <<  "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+
+
+//quicksort + popularity selected
+auto t1 = Clock::now();
+quicksort(movies, 0, movies.size() - 1, "popularity", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", " << movies[i - 1].popularityScore << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//quicksort + revenue selected
+auto t1 = Clock::now();
+quicksort(movies, 0, movies.size() - 1, "revenue", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", $" << movies[i - 1].movieRevenue << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//quicksort + budget selected
+auto t1 = Clock::now();
+quicksort(movies, 0, movies.size() - 1, "budget", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", $" << movies[i - 1].movieBudget << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//quicksort + runtime selected
+auto t1 = Clock::now();
+quicksort(movies, 0, movies.size() - 1, "runtime", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", " << movies[i - 1].movieRuntime << " min" << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
+
+//quicksort + vote average selected
+auto t1 = Clock::now();
+quicksort(movies, 0, movies.size() - 1, "vote average", true);
+auto t2 = Clock::now();
+
+for (int i = 1; i <= 10; i++) {
+	std::cout << i << ". " movies[i - 1].movieName << ", " << movies[i - 1].voteAverage << "\n\n";
+}
+std::cout << "\n\nTime elapsed (sec): " << duration_cast<seconds>(t2 - t1).count();
