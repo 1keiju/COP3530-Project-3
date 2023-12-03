@@ -871,7 +871,20 @@ int main() {
                 setText(selectedText, 700, 75);
                 menuScreen.draw(selectedText);
 
-
+                sf::Text helpText;
+                helpText.setFont(font);
+                helpText.setString("Help:\n\n Top Movies 2023: Select the source of the\n top ten movies of the year by "
+                                   "clicking on\n the filters on the left side of the screen."
+                                   "\n\n Sort: Select the filter that you \n want to apply, which sorts a dataset of \n"
+                                   " over 100,000 movies using either quick \n sort (the top three) or merge sort (the"
+                                   " bottom two).");
+                helpText.setCharacterSize(20);
+                helpText.setStyle(sf::Text::Bold);
+                helpText.setFillColor(sf::Color::White);
+                float helpTextX = ((float) 400);
+                float helpTextY = ((float) 350);
+                setText(helpText, helpTextX, helpTextY);
+                menuScreen.draw(helpText);
 
             }
 
