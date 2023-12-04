@@ -73,7 +73,8 @@ class Movies {
 private:
 	int numMovies;
 public:
-	std::vector<Movie> movies;
+    std::vector<Movie> moviesVector;
+    Movie* movies;
 	Movies(); // constructor, grabs data from opened file and uses populateMovieList()
 	void populateMovieList(); // reads .csv file
 	void printMovies();

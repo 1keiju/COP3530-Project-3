@@ -1,109 +1,101 @@
 #include "Movies.h"
+using namespace std;
 
 Movies::Movies() {
+    movies = new Movie[110001];
 	numMovies = 0;
 	populateMovieList();
 }
 
 void Movies::populateMovieList() {
 
-	std::fstream file("./movies.csv");
+	fstream file("./movies.csv");
 
-	std::string row;
+	string row;
+    int index = 0;
 
-	while (std::getline(file, row)) {
+	while (getline(file, row)) {
+
+        // check if out of index
+        if(index > 110000) {
+            break;
+        }
 
 		// movie variables
-		std::string name;
+		string name;
 		double score;
 		double budget;
 		double revenue;
 		double runtime;
 		double average;
 
-		std::getline(file, row);
+		getline(file, row);
 
 		// .csv string variables
-		std::istringstream stream(row);
-		std::string token;
+		istringstream stream(row);
+		string token;
 
 		/* FYI, things need to be read sequentially to properly assign variables
 		   The getline below moves the counter forward so movie name can be read*/
 
-		std::getline(stream, token, ','); // reads ID
+		getline(stream, token, ','); // reads ID
 
-
-		std::getline(stream, token, ','); // reads name
-
+		getline(stream, token, ','); // reads name
 
 		name = token;
 
+		getline(stream, token, ','); // reads genres
 
-		std::getline(stream, token, ','); // reads genres
+		getline(stream, token, ','); // reads language
 
-		std::getline(stream, token, ','); // reads language
+		getline(stream, token, ','); // reads overview
 
-		std::getline(stream, token, ','); // reads overview
-
-		std::getline(stream, token, ','); // reads popularity score [DOUBLE]
+		getline(stream, token, ','); // reads popularity score [DOUBLE]
 		if (token == "") token = "0";
 
-		score = std::stod(token);
+		score = stod(token);
 
-		std::getline(stream, token, ','); // reads production studio
+		getline(stream, token, ','); // reads production studio
 
-		std::getline(stream, token, ','); // reads release date
+		getline(stream, token, ','); // reads release date
 
-		std::getline(stream, token, ','); // reads budget [DOUBLE]
+		getline(stream, token, ','); // reads budget [DOUBLE]
 		if (token == "") token = "0";
 
-		budget = std::stod(token);
+		budget = stod(token);
 
-		std::getline(stream, token, ','); // reads revenue [DOUBLE]
+		getline(stream, token, ','); // reads revenue [DOUBLE]
 		if (token == "") token = "0";
 
-		revenue = std::stod(token);
+		revenue = stod(token);
 
-		std::getline(stream, token, ','); // reads runtime [INT]
+		getline(stream, token, ','); // reads runtime [INT]
 		if (token == "") token = "0";
 
-		runtime = std::stod(token);
+		runtime = stod(token);
 
-		std::getline(stream, token, ','); // reads status [BOOL]
+		getline(stream, token, ','); // reads status [BOOL]
 
-		std::getline(stream, token, ','); // reads tagline
+		getline(stream, token, ','); // reads tagline
 
-		std::getline(stream, token, ','); // reads vote average [DOUBLE]
+		getline(stream, token, ','); // reads vote average [DOUBLE]
 		if (token == "") token = "0";
 
-		average = std::stod(token);
+		average = stod(token);
 
-		// std::getline(stream, token, ','); // reads vote count [DOUBLE]
-		// std::getline(stream, token, ','); // reads credits
-		// std::getline(stream, token, ','); // reads keywords
-		// std::getline(stream, token, ','); // reads poster
-		// std::getline(stream, token, ','); // reads background
-		// std::getline(stream, token, ','); // reads recommendations
+        // add new element to the array
+		Movie newMovie = Movie(name, score, revenue, budget, runtime, average);
+        movies[index] = newMovie;
 
-		movies.push_back(Movie(name, score, revenue, budget, runtime, average));
+        // add new element to vector
+        moviesVector.push_back(Movie(name, score, revenue, budget, runtime, average));
+
 		numMovies++;
+        index++;
+
 	}
 }
 
-void Movies::printMovies() {
-	for (int i = 0; i < 10; i++) { // currently set at 100 for hard-coded testing
-		std::cout << movies[i].movieName << " | " << movies[i].genresSTR << " | " << movies[i].movieOverview << "\n\n";
-	}
-}
+Movie::Movie() {
 
-std::string Movies::createTopTenList() {
-	std::string returnString = "";
-	for (int i = 0; i < 10; i++) { // currently set at 10 for printing top 10 movies
-		std::string num = std::to_string(i + 1) + ".";
-
-		returnString += num + " " + movies[i].movieName + "\n\n";
-
-		//std::cout << (i + 1) << ". " << movies[i].movieName << "\n\n";
-	}
-	return returnString;
 }
